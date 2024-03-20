@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
-  username: {
+const supplierSchema = new mongoose.Schema({
+  suppliername: {
     type:String,
     required:true,
     unique: true,
@@ -20,5 +20,5 @@ const userSchema = new mongoose.Schema({
 
 }, {timestamps:true});
 
-const User = mongoose.model('User', userSchema);
-export default User;
+const Supplier = mongoose.model('Supplier', supplierSchema);
+export default Supplier;
