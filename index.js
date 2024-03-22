@@ -1,6 +1,7 @@
 import  express  from "express";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
+import supplierAuthRoute from './routes/supplierAuth.route.js';
 
 
 //MongDB connection...
@@ -21,5 +22,15 @@ app.listen(3000, () => {
 });
 
 //api routes...
+app.use('/api/sauth', supplierAuthRoute);
 
-
+//error handler middleware...
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal server error';
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
