@@ -18,6 +18,11 @@ const supplierSchema = new mongoose.Schema({
     required:true,
   },
 
+  profilePic: {
+    type: String,
+    default: 'https://static.vecteezy.com/system/resources/previews/000/495/460/non_2x/vector-profile-line-black-icon.jpg'
+  }
+
 }, {timestamps:true});
 
 const Supplier = mongoose.model('Supplier', supplierSchema);

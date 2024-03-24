@@ -1,6 +1,7 @@
 import Supplier from '../models/supplier.model.js';
 import bcryptjs from 'bcryptjs';
 import  jwt  from 'jsonwebtoken';
+import { errorHandler } from '../utills/error.js';
 
 //sign up
 export const signup = async (req, res, next) => {
@@ -54,6 +55,9 @@ export const signin = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
 
 
 
