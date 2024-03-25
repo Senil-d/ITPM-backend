@@ -6,7 +6,7 @@ import {errorHandler} from '../utills/error.js';
 //update supplier..............
 export const updateSupplier = async (req, res, next) => {
   if (req.supplier.id !== req.params.id)
-    return next(errorHandler(401, 'You are not authenticated to update account!'));
+    return next(errorHandler(401, 'You do not have access to update this account!'));
   try {
     if (req.body.password) {
       req.body.password = bcryptjs.hashSync(req.body.password, 10);
@@ -28,6 +28,19 @@ export const updateSupplier = async (req, res, next) => {
     const { password, ...rest } = updatedSupplier._doc;
 
     res.status(200).json(rest);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//delete supplier...
+export const deleteSupplier = async (req, res, next) => {
+  if (req.supplier.id !== req.params.id)
+    return next(errorHandler(401, 'You do not have access to delete this account!'));
+  try {
+    await Supplier.findByIdAndDelete(req.params.id);
+    res.clearCookie('access_token');
+    res.status(200).json('Your supplier account has been deleted!');
   } catch (error) {
     next(error);
   }
