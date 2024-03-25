@@ -56,7 +56,15 @@ export const signin = async (req, res, next) => {
   }
 };
 
-
+//sign out..........
+export const signout = async (req, res, next) => {
+  try {
+    res.clearCookie('access_token');
+    res.status(200).json('Supplier loged out!');
+  } catch (error) {
+    next(error);
+  }
+};
 
 
 
