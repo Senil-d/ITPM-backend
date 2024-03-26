@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import supplierAuthRoute from './routes/supplierAuth.route.js';
 import supplierRoute from './routes/supplier.route.js';
 import cookieParser from "cookie-parser";
+import tourRoute from './routes/tour.route.js';
 
 
 //MongDB connection...
@@ -27,6 +28,7 @@ app.listen(3000, () => {
 //api routes...
 app.use('/api/sauth', supplierAuthRoute);
 app.use('/api/supplier', supplierRoute);
+app.use('/api/tour', tourRoute);
 
 //error handler middleware...
 app.use((err, req, res, next) => {
