@@ -38,9 +38,9 @@ export const updateTour = async (req, res, next) => {
   if (!tour) {
     return next(errorHandler(404, 'Tour not found!'));
   }
-  // if (req.supplier.id !== tour.supplierRef) {
-  //   return next(errorHandler(401, 'You can only update your own tours!'));
-  // }
+  if (req.supplier.id !== tour.supplierRef) {
+    return next(errorHandler(401, 'You can only update your own tours!'));
+  }
 
   try {
     const updatedTour = await Tour.findByIdAndUpdate(
