@@ -32,3 +32,25 @@ export const deleteTour = async (req, res, next) => {
   }
 };
 
+//update a tour.............
+export const updateTour = async (req, res, next) => {
+  const tour = await Tour.findById(req.params.id);
+  if (!tour) {
+    return next(errorHandler(404, 'Tour not found!'));
+  }
+  // if (req.supplier.id !== tour.supplierRef) {
+  //   return next(errorHandler(401, 'You can only update your own tours!'));
+  // }
+
+  try {
+    const updatedTour = await Tour.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(updatedTour);
+  } catch (error) {
+    next(error);
+  }
+};
+
